@@ -1,0 +1,5 @@
+- name: Download Kafka tarball
+  shell: "wget http://mirrors.ibiblio.org/apache/kafka/0.8.0/kafka-0.8.0-src.tgz creates={{ kafka_src_path }}"
+
+- name: untar Kafka tarball
+  shell: "tar xvzf kafka-0.8.0-src.tgz creates={{ kafka_src_path }}"

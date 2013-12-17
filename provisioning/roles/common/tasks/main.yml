@@ -1,1 +1,3 @@
 - include: oracle_java.yml
+- include: misc.yml
+

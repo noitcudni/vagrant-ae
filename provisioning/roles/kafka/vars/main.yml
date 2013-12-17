@@ -1,0 +1,2 @@
+kafka_version: '0.8.0'
+kafka_src_path: '/home/vagrant/kafka-0.8.0-src'
