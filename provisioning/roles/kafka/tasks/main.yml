@@ -1,5 +1,8 @@
 - name: Download Kafka tarball
   shell: "wget http://mirrors.ibiblio.org/apache/kafka/0.8.0/kafka-0.8.0-src.tgz creates={{ kafka_src_path }}"
 
-- name: untar Kafka tarball
+- name: Untar Kafka tarball
   shell: "tar xvzf kafka-0.8.0-src.tgz creates={{ kafka_src_path }}"
+
+- name: Compile Kafka source
+  shell: "cd {{ kafka_src_path }}; ./sbt update; ./sbt package; ./sbt assembly-package-dependency creates={{ kafka_src_path }}/target"
