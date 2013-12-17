@@ -1,0 +1,8 @@
+# by pass Oracle's annoying licensing agreement
+- name: Download JDK
+  shell: "wget --quiet --no-cookies --output-document {{ jdk_rpm }} --header 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com;' {{ jdk_download_url }} --no-check-certificate creates={{ jdk_rpm }}"
+
+- name: Install JDK
+  shell: "yum -y --nogpgcheck localinstall {{ jdk_rpm }} creates={{ jdk_install_dir }} creates={{ jdk_rpm }}"
+  sudo: yes
+
