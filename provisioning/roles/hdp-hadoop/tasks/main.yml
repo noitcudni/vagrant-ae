@@ -1,0 +1,35 @@
+- name: epel (Extra Packages for Enterprise Linux)
+  yum: name="http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm" state=present
+  sudo: yes
+
+- name: Fetch HDP repo
+  shell: "wget http://public-repo-1.hortonworks.com/HDP-2.0.0.2/repos/centos6/hdp.repo -O /etc/yum.repos.d/hdp.repo creates=/etc/yum.repos.d/hdp.repo"
+  sudo: yes
+
+- name: yum install hadoop
+  yum: name='hadoop' state=installed
+  sudo: yes
+
+- name: yum install hadoop-libhdfs
+  yum: name='hadoop-libhdfs' state=installed
+  sudo: yes
+
+- name: yum install hadoop-native
+  yum: name='hadoop-native' state=installed
+  sudo: yes
+
+- name: yum install hadoop-pipes
+  yum: name='hadoop-pipes' state=installed
+  sudo: yes
+
+- name: yum install hadoop-sbin
+  yum: name='hadoop-sbin' state=installed
+  sudo: yes
+
+- name: yum install openssl
+  yum: name='openssl' state=installed
+  sudo: yes
+
+#- name: yum install hadoop packages
+  #shell: "yum -y install hadoop hadoop-libhdfs hadoop-native hadoop-pipes hadoop-sbin openssl created=/etc/hadoop"
+  #sudo: yes

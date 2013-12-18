@@ -1,8 +1,8 @@
 - name: git
-  yum: name='git' state=latest
+  yum: name='git' state=installed
   sudo: yes
 
 - name: easy_install
-  yum: name='python-distribute' state=latest
+  yum: name='python-distribute' state=installed
   sudo: yes
 

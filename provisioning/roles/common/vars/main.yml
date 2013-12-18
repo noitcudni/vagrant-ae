@@ -1,6 +1,5 @@
 jdk_version: '7u45'
 jdk_build: 'b18'
-jdk_filename: "jdk-7u45-linux-x64.rpm"
-jdk_install_dir: 'jdk1.7.0_45'
-jdk_download_url: "http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-linux-x64.rpm"
-jdk_rpm: "/tmp/jdk-7u45-linux-x64.rpm"
+jdk_filename: "jdk-{{ jdk_version }}-linux-x64.rpm"
+jdk_download_url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version }}-{{ jdk_build }}/{{ jdk_filename }}"
+jdk_rpm: "/vagrant/{{ jdk_filename }}"
