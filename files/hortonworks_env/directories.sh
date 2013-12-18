@@ -152,4 +152,4 @@ OOZIE_TMP_DIR="/var/tmp/oozie"
 #
 SQOOP_CONF_DIR="/etc/sqoop/conf"
 
-export HADOOP_LIBEXEC_DIR=/usr/lib/hadoop/libexec
+HADOOP_LIBEXEC_DIR=/usr/lib/hadoop/libexec
