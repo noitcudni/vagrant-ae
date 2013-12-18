@@ -63,3 +63,27 @@
 - name: yum install hadoop-lzo-native
   yum: name='hadoop-lzo-native' state=installed
   sudo: yes
+
+# source hadoop related environment variables
+- name: source usersAndGroups env
+  shell: 'source {{ users_and_groups_env }}'
+
+- name: source directories env
+  shell: 'source {{ directories_env }}'
+
+# source env in .bash_profile
+- shell: "grep {{ users_and_groups_env }} ~/.bash_profile"
+  register: users_and_groups_env_result
+  ignore_errors: true
+
+- shell: "grep {{ directories_env }} ~/.bash_profile"
+  register: directories_env_result
+  ignore_errors: true
+
+- name: add user env variables into .bash_profile
+  shell:  "echo \"source {{ users_and_groups_env }}\" >> ~/.bash_profile"
+  when: not users_and_groups_env_result.stdout
+
+- name: add directory env variables into .bash_profile
+  shell: "echo \"source {{ directories_env }}\" >> ~/.bash_profile"
+  when: not directories_env_result.stdout
