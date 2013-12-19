@@ -114,7 +114,7 @@
   </property>
     <property>
     <name>dfs.block.local-path-access.user</name>
-    <value>hbase</value>
+    <value>hdfs</value> <!-- originally hortonworks set it to hbase, but it was spitting out permission errors.-->
   </property>
     <property>
     <name>dfs.datanode.address</name>

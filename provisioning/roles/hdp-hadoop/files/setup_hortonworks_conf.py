@@ -83,7 +83,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     hdfs_conf_file_lst = ['core_hadoop/core-site.xml', 'core_hadoop/hdfs-site.xml', 'core_hadoop/yarn-site.xml', 'core_hadoop/mapred-site.xml']
-    #hdfs_conf_file_lst = ['core_hadoop/core-site.xml', 'core_hadoop/hdfs-site.xml']
 
     hortonworks_param_dict = {}
     hortonworks_param_dict.update(read_in_env_file(args.users_and_groups_env))
