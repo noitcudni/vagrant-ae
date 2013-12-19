@@ -6,3 +6,10 @@
   yum: name='python-distribute' state=installed
   sudo: yes
 
+- name: install pip
+  easy_install: name='pip'
+  sudo: yes
+
+- name: pip
+  pip: name='argparse' state=present
+  sudo: yes

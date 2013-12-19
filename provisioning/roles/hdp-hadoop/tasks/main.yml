@@ -86,3 +86,10 @@
 - script: create_hortonworks_dir.sh
   sudo: yes
 
+#- debug: msg="{{ ansible_hostname }}"
+
+- name: copy configuration file templates to
+  shell: "cp -r /vagrant/files/hortonworks_conf ~/ creates=~/hortonworks_conf"
+
+
+

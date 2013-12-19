@@ -8,6 +8,11 @@ mkdir -p $DFS_NAME_DIR;
 chown -R $HDFS_USER:$HADOOP_GROUP $DFS_NAME_DIR;
 chmod -R 755 $DFS_NAME_DIR;
 
+# create secondary name node directories
+mkdir -p $FS_CHECKPOINT_DIR;
+chown -R $HDFS_USER:$HADOOP_GROUP $FS_CHECKPOINT_DIR;
+chmod -R 755 $FS_CHECKPOINT_DIR;
+
 # Create DataNode and YARN NodeManager Local Directories
 mkdir -p $DFS_DATA_DIR;
 chown -R $HDFS_USER:$HADOOP_GROUP $DFS_DATA_DIR;

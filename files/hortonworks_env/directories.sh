@@ -20,7 +20,7 @@ DFS_NAME_DIR="/hadoop/hdfs/nn";
 DFS_DATA_DIR="/hadoop/hdfs/dn";
 
 # Space separated list of directories where SecondaryNameNode will store checkpoint image. For example, /grid/hadoop/hdfs/snn /grid1/hadoop/hdfs/snn /grid2/hadoop/hdfs/snn
-#FS_CHECKPOINT_DIR="TODO-LIST-OF-SECONDARY-NAMENODE-DIRS";
+FS_CHECKPOINT_DIR="/hadoop/hdfs/snn"
 
 
 
