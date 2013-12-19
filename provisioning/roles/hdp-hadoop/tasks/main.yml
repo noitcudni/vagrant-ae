@@ -1,10 +1,3 @@
-- name: download epel rpm
-  shell: "wget --no-check-certificate http://download.fedoraproject.org/pub/epel/6/x86_64/{{ epel_filename }} -O {{ epel_rpm }} creates={{ epel_rpm }}"
-
-- name: yum install epel (Extra Packages for Enterprise Linux)
-  shell: "yum -y --nogpgcheck localinstall {{ epel_rpm }}"
-  sudo: yes
-
 # install the hadoop packages
 - name: Fetch HDP repo
   shell: "wget http://public-repo-1.hortonworks.com/HDP-2.0.0.2/repos/centos6/hdp.repo -O /etc/yum.repos.d/hdp.repo creates=/etc/yum.repos.d/hdp.repo"
@@ -66,21 +59,23 @@
 
 
 # setup shell environment variables
-- shell: "grep {{ directories_env }} ~/.bash_profile"
+- shell: "grep DFS_NAME_DIR /etc/environment"
   register: directories_env_result
   ignore_errors: true
 
-- shell: "grep {{ users_and_groups_env }} ~/.bash_profile"
+- shell: "grep HDFS_USER /etc/environment"
   register: users_and_groups_env_result
   ignore_errors: true
 
 - name: add user env variables into .bash_profile
-  shell:  "echo \"source {{ users_and_groups_env }}\" >> ~/.bash_profile"
+  shell:  "grep = {{ users_and_groups_env }} | cut -d';' -f1 >> /etc/environment;"
   when: not users_and_groups_env_result.stdout
+  sudo: yes
 
 - name: add directory env variables into .bash_profile
-  shell: "echo \"source {{ directories_env }}\" >> ~/.bash_profile"
+  shell: "grep = {{ directories_env }} | cut -d';' -f1 >> /etc/environment;"
   when: not directories_env_result.stdout
+  sudo: yes
 
 # create directories
 - script: create_hortonworks_dir.sh

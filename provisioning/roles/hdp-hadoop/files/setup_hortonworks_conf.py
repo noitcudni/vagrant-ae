@@ -68,6 +68,10 @@ def construct_hostname_dict(args):
 
 
 if __name__ == "__main__":
+    """
+    Example of running it.
+    setup_hortonworks_conf.py --namenode=localhost --secondarynamenode=localhost --rmnode=localhost --jobhistory=localhost --conf_template_dir=/home/vagrant/hortonworks_conf/ --users_and_groups_env=/vagrant/files/hortonworks_env/usersAndGroups.sh  --directories_env=/vagrant/files/hortonworks_env/directories.sh
+    """
     parser = argparse.ArgumentParser(description="fill in your hadoop parameter for you")
     parser.add_argument('--namenode', required=True, dest='namenode')
     parser.add_argument('--secondarynamenode', required=True, dest='snamenode')
