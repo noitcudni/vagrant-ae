@@ -9,3 +9,15 @@ http://downloads.vagrantup.com/tags/v1.3.5
 5) Boot it up
 -- cd vagrant_ae
 -- vagrant up
+
+FAQ:
+1) I ran into the following error when I try to do 'vagrant up'.
+[default] Clearing any previously set network interfaces...
+There was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+  Command: ["hostonlyif", "create"]
+
+Chances are that you are on a Mac. Run the the following command on your
+host machine and do 'vagrant up' again.
+-- sudo /Library/StartupItems/VirtualBox/VirtualBox restart
