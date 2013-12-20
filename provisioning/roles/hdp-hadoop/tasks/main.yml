@@ -67,12 +67,21 @@
   register: users_and_groups_env_result
   ignore_errors: true
 
-- name: add user env variables into .bash_profile
+- shell: "grep JAVA_HOME /etc/environment"
+  register: JAVA_HOME_result
+  ignore_errors: true
+
+- name: add JAVA_HOME into /etc/environment
+  shell: "echo JAVA_HOME=/usr/java/default >> /etc/environment"
+  when: not JAVA_HOME_result.stdout
+  sudo: yes
+
+- name: add user env variables into /etc/environment
   shell:  "grep = {{ users_and_groups_env }} | cut -d';' -f1 >> /etc/environment;"
   when: not users_and_groups_env_result.stdout
   sudo: yes
 
-- name: add directory env variables into .bash_profile
+- name: add directory env variables into /etc/environment
   shell: "grep = {{ directories_env }} | cut -d';' -f1 >> /etc/environment;"
   when: not directories_env_result.stdout
   sudo: yes
@@ -81,8 +90,36 @@
 - script: create_hortonworks_dir.sh
   sudo: yes
 
+#- shell: sh /vagrant/provisioning/roles/hdp-hadoop/files/done_copying_over_conf.sh
+- name: Do we need to copy over conf files
+  script: done_copying_over_conf.sh
+  register: done_copying_over_conf
+  ignore_errors: true
+
+- debug: var=done_copying_over_conf
+
 - name: copy configuration file templates to
   shell: "cp -r /vagrant/files/hortonworks_conf ~/ creates=~/hortonworks_conf"
+  when: done_copying_over_conf.rc == 0
 
+## fill in the environment variables into the config files
 - name: generate config files
   script: setup_hortonworks_conf.py --namenode=localhost --secondarynamenode=localhost --rmnode=localhost --jobhistory=localhost --conf_template_dir=/home/vagrant/hortonworks_conf/ --users_and_groups_env=/vagrant/files/hortonworks_env/usersAndGroups.sh  --directories_env=/vagrant/files/hortonworks_env/directories.sh
+  when: done_copying_over_conf.rc == 0
+
+## copy the config files to the appropriate location
+- script: copy_hdp_conf.sh
+  when: done_copying_over_conf.rc == 0
+  sudo: yes
+
+## format the namenode
+- name: is the namenode already formatted?
+  script: is_namenode_formatted.sh
+  register: is_namenode_formatted
+  ignore_errors: true
+
+- debug: var=is_namenode_formatted
+
+- name: format namenode
+  script: format_namenode.sh
+  when: is_namenode_formatted.rc == 0
