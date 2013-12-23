@@ -39,3 +39,4 @@
 
 - name: set up mvn symlink
   file: state=link src=/usr/share/apache-maven/bin/mvn dest=/usr/bin/mvn
+  sudo: yes
