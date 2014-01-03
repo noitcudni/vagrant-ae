@@ -1,0 +1,17 @@
+/var/log/nginx/*.log {
+    daily
+    missingok
+    rotate 52
+    compress
+    delaycompress
+    notifempty
+    create 640 nginx adm
+    sharedscripts
+       dateext
+       dateformat -%Y%m%d-%s.done
+    postrotate
+        [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
+        chown flume:flume /var/log/nginx/*.done
+        mv /var/log/nginx/*.done /var/log/nginx/flume-drop/
+    endscript
+}

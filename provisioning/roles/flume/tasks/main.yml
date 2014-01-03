@@ -1,0 +1,7 @@
+- name: yum install flume
+  yum: name='flume' state=installed
+  sudo: yes
+
+- name: yum install flume-agent
+  yum: name='flume-agent' state=installed
+  sudo: yes

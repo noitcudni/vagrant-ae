@@ -3,3 +3,5 @@
     - common
     - kafka
     - hdp-hadoop
+    - nginx
+    - flume
