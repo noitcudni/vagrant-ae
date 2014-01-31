@@ -9,9 +9,9 @@
   yum: name='git' state=installed
   sudo: yes
 
-- name: yum install python-pip
-  yum: name='python-pip' state=installed
-  sudo: yes
+#- name: yum install python-pip
+  #yum: name='python-pip' state=installed
+  #sudo: yes
 
 #- name: easy_install
   #yum: name='python-distribute' state=installed
@@ -21,9 +21,9 @@
   #easy_install: name='pip'
   #sudo: yes
 
-- name: install argparse for python
-  pip: name='argparse' state=present
-  sudo: yes
+#- name: install argparse for python
+  #pip: name='argparse' state=present
+  #sudo: yes
 
 - name: install tmux
   yum: name='tmux' state=installed
@@ -33,14 +33,22 @@
   yum: name='lsof' state=installed
   sudo: yes
 
-- name: download maven repo
-  shell: "wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo"
+#- name: download maven repo
+  #shell: "wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo"
+  #sudo: yes
+
+#- name: install maven
+  #yum: name='apache-maven' state=installed
+  #sudo: yes
+
+#- name: set up mvn symlink
+  #file: state=link src=/usr/share/apache-maven/bin/mvn dest=/usr/bin/mvn
+  #sudo: yes
+
+- name: install vim
+  yum: name='vim' state=installed
   sudo: yes
 
-- name: install maven
-  yum: name='apache-maven' state=installed
-  sudo: yes
-
-- name: set up mvn symlink
-  file: state=link src=/usr/share/apache-maven/bin/mvn dest=/usr/bin/mvn
+- name: install ansible
+  yum: name='ansible' state=installed
   sudo: yes
