@@ -23,12 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network :private_network, ip: "192.168.56.10"
+  config.vm.network :private_network, ip: "192.168.56.11"
 
 
   config.vm.provider :virtualbox do |vb|
-    vb.name = "ae_local"
-    vb.customize ["modifyvm", :id, "--memory", "4096"]
+    vb.name = "ae_local2"
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
   end
 
