@@ -9,17 +9,14 @@
   yum: name='git' state=installed
   sudo: yes
 
-#- name: yum install python-pip
-  #yum: name='python-pip' state=installed
-  #sudo: yes
+- name: yum install python-pip
+  yum: name='python-pip' state=installed
+  sudo: yes
 
 #- name: easy_install
   #yum: name='python-distribute' state=installed
   #sudo: yes
 
-#- name: install pip
-  #easy_install: name='pip'
-  #sudo: yes
 
 #- name: install argparse for python
   #pip: name='argparse' state=present
@@ -49,6 +46,21 @@
   yum: name='vim' state=installed
   sudo: yes
 
-- name: install ansible
-  yum: name='ansible' state=installed
+- name: yum install ansible dependencies
+  yum: name='{{item}}' state=installed
   sudo: yes
+  with_items:
+    - PyYAML
+    - libyaml
+    - python-babel
+    - python-crypto
+    - python-httplib2
+    #- python-jinja2
+    - python-keyczar
+    - python-paramiko
+    - python-pyasn1
+
+- name: install ansible
+  pip: name='ansible' state=present
+  sudo: yes
+
